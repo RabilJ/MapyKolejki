@@ -1,14 +1,12 @@
 import java.io.*;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MapaTest {
+    private static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) throws IOException {
         HashMap<Integer, Customer> people = new HashMap<>();
         File file = new File("customers.csv");
-        file.createNewFile();
         BufferedReader bfr = new BufferedReader(new FileReader(file));
         String line = "";
         while ((line = bfr.readLine()) != null) {
@@ -23,25 +21,36 @@ public class MapaTest {
                 people.put(cust.getId(), cust);
             }
         }
-        Set<Integer> keySet = people.keySet();
-        Collection<Customer> values = people.values();
-        System.out.println(keySet);
-        for (Customer value : values) {
-            System.out.println(value);
+//        Set<Integer> keySet = people.keySet();
+//        Collection<Customer> values = people.values();
+//        System.out.println(keySet);
+//        for (Customer value : values) {
+//            System.out.println(value);
+//
+//        }
 
-        }
-
-        findById(people,433);
+        findById(people);
     }
-    public static void findById (HashMap<Integer, Customer>map, int id){
-        try {
-            Set<Integer>keySet = map.keySet();
-            Customer customer = map.get(id);
-            if (customer!=null)
+
+    public static void findById(HashMap<Integer, Customer> map) {
+        boolean check = true;
+        while (check) {
+            System.out.println("Podaj id klienta: ");
+            try {
+                int id = sc.nextInt();
+                Set<Integer> keySet = map.keySet();
+                Customer customer = map.get(id);
+                if (customer != null) {
                     System.out.println("Znaleziono klienta!");
-                    System.out.println(map.get(id));
-        } catch (NullPointerException ex) {
-            System.out.println("Nie ma takiego klienta w naszej bazie danych..");
+                    System.out.println(customer);
+                    check = false;
+                } else {
+                    System.out.println("Nie ma takiego klienta, spróbuj ponownie");
+                }
+            } catch (InputMismatchException ex) {
+                System.out.println("Podałeś nieprawidłową wartość spróbuj ponownie");
+                sc.next();
+            }
         }
     }
 }
