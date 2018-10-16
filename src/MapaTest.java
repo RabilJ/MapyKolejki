@@ -54,3 +54,7 @@ public class MapaTest {
         }
     }
 }
+//Tablice zachowana kolejnosc, latwo wyciagnac konkretny element i wstawic
+//Zbiory, nieuporzadkowane, bez duplikatow
+//Kolejki
+//Mapy - klucze i wartości nasze !go to!
